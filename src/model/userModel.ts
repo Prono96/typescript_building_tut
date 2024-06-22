@@ -5,7 +5,7 @@ const userSchema = new Schema({
   name: String, 
   state: String,
   profession: String,
-  marital_status: String,
+  marital_status: Boolean,
   date: { type: Date, default: Date.now },
 });
 

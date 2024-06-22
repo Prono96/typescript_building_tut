@@ -3,16 +3,20 @@ import  User  from '../model/userModel';
 
 const router = Router();
 
-router.post('/add', (req: Request, res: Response) => {
+router.post('/user/add', (req: Request, res: Response) => {
     let output = {flag: false, message: "", data:{}}
     const newUser = new User({
-        name: req.body,
-        state: req.body,
-        profession: req.body,
-        marital_status: req.body,
-      }); 
+        name: req.body.name,
+        state: req.body.state,
+        profession: req.body.profession,
+        marital_status: req.body.marital_status,
+    }); 
 
-    newUser.save()
+    const savedUser = newUser.save()
+    if (!savedUser) {
+        output.message = "user saved failed";
+        return output
+    }
 
     output.flag = true;
     output.message = "user successfully saved";
@@ -20,6 +24,5 @@ router.post('/add', (req: Request, res: Response) => {
 
     res.status(200).json(output)
 })
-
 
 export default router;
